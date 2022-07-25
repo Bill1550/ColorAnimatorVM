@@ -73,7 +73,7 @@ class MainViewModel : ViewModel() {
 
     private suspend fun startColorJob() {
         colorJob?.cancelAndJoin()
-        colorJob = viewModelScope.launch {
+        colorJob = viewModelScope.launch(Dispatchers.Default) {
             while(isActive) {
                 currentHue = (currentHue + 1) % 360
                 val newColor = currentHue.toFloat().colorForHue()
